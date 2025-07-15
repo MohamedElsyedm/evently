@@ -9,6 +9,7 @@ class EventlyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
       routes: {HomeScreen.routName: (_) => HomeScreen()},
     );
