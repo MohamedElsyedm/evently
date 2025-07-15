@@ -1,0 +1,24 @@
+flutter_native_splash:
+ 
+  color: "#F2FEFF"
+ 
+  # png file and should be sized for 4x pixel density.
+  image: assets/images/splash.png
+  branding: assets/images/evently_branding.png
+  branding_bottom_padding: 24
+
+ 
+  #color_dark: "#042a49"
+  #image_dark: assets/splash-invert.png
+  #branding_dark: assets/dart_dark.png
+
+  
+  android_12:
+  #  rectangle 960 * 960 & circle 640
+    image: assets/images/android12splash.png
+    color: "#F2FEFF"
+    branding: assets/images/evently_branding.png
+    branding_bottom_padding: 24
+
+
+   
