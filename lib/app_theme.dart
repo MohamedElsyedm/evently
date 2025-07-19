@@ -10,6 +10,7 @@ class AppTheme {
   static const Color white = Color(0xFFFFFFFF);
 
   static ThemeData lightTheme = ThemeData(
+    scaffoldBackgroundColor: backgroundLight,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: primary,
 
@@ -23,6 +24,61 @@ class AppTheme {
       backgroundColor: primary,
       foregroundColor: white,
       shape: CircleBorder(side: BorderSide(width: 5, color: white)),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      hintStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: grey,
+      ),
+
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: grey),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: grey),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: grey),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: grey),
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: primary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(16),
+        ),
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: primary,
+        textStyle: TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+          decoration: TextDecoration.underline,
+          fontStyle: FontStyle.italic,
+        ),
+      ),
+    ),
+    textTheme: TextTheme(
+      titleLarge: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        color: white,
+      ),
+      titleMedium: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: black,
+      ),
     ),
   );
   static ThemeData darkTheme = ThemeData();
