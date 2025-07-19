@@ -20,7 +20,11 @@ class EventlyApp extends StatelessWidget {
         RegisterScreen.routName: (_) => RegisterScreen(),
         HomeScreen.routName: (_) => HomeScreen(),
       },
+<<<<<<<<< Temporary merge branch 1
+      initialRoute: LoginScreen.routName,
+=========
       initialRoute: HomeScreen.routName,
+>>>>>>>>> Temporary merge branch 2
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.light,
