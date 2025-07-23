@@ -60,8 +60,13 @@ class _HomeHeaderState extends State<HomeHeader> {
                     (category) => TabItem(
                       icon: category.icon,
                       isSelected:
+<<<<<<< HEAD
                           CategoryModel.categories.indexOf(category) + 1 ==
                           index,
+=======
+                          CategoryModel.categories.indexOf(category) ==
+                          index + 1,
+>>>>>>> 6b1f7a44b53913584c5c27f5cc6971947359a248
                       label: category.name,
                       selectedForegroundColor: AppTheme.primary,
                       unSelectedForegroundColor: AppTheme.white,

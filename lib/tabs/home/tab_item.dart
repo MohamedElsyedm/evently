@@ -10,7 +10,10 @@ class TabItem extends StatelessWidget {
   Color selectedBackgroundColor;
 
   TabItem({
+<<<<<<< HEAD
     super.key,
+=======
+>>>>>>> 6b1f7a44b53913584c5c27f5cc6971947359a248
     required this.label,
     required this.icon,
     required this.isSelected,

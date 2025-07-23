@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+=======
+import 'package:flutter/widgets.dart';
+>>>>>>> 6b1f7a44b53913584c5c27f5cc6971947359a248
 
 class CategoryModel {
   String id;
