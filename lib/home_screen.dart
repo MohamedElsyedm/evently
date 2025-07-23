@@ -5,7 +5,6 @@ import 'package:evently/tabs/love/love_tab.dart';
 import 'package:evently/tabs/map/map_tab.dart';
 import 'package:evently/tabs/profile/profile_tab.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routName = '/homeScreen';

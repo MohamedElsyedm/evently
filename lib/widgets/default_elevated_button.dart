@@ -4,7 +4,11 @@ class DefaultElevatedButton extends StatelessWidget {
   String label;
   VoidCallback onPreessed;
 
-  DefaultElevatedButton({required this.label, required this.onPreessed});
+  DefaultElevatedButton({
+    super.key,
+    required this.label,
+    required this.onPreessed,
+  });
 
   @override
   Widget build(BuildContext context) {
