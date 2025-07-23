@@ -29,12 +29,12 @@ class AppTheme {
       hintStyle: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w500,
-        color: grey,
+        color: primary,
       ),
 
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: grey),
+        borderSide: BorderSide(color: primary),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
