@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
               controller: emailController,
             ),
             SizedBox(height: 24),
-            DefaultElevatedButton(label: 'Login', onPreessed: login),
+            DefaultElevatedButton(label: 'Login', onPressed: login),
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

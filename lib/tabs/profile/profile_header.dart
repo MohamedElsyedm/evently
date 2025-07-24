@@ -9,7 +9,6 @@ class ProfileHeader extends StatelessWidget {
     TextTheme textTheme = Theme.of(context).textTheme;
     return Container(
       padding: EdgeInsets.all(16),
-      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: AppTheme.primary,
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(64)),
@@ -18,9 +17,9 @@ class ProfileHeader extends StatelessWidget {
         child: Row(
           children: [
             Image.asset(
-              'assets/images/eating.png',
-              width: MediaQuery.sizeOf(context).width * 0.30,
-              height: MediaQuery.sizeOf(context).height * 0.12,
+              'assets/images/user_image.png',
+
+              height: MediaQuery.sizeOf(context).height * 0.15,
               fit: BoxFit.fill,
             ),
             SizedBox(width: 10),

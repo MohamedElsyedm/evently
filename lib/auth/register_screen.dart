@@ -52,7 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               controller: emailController,
             ),
             SizedBox(height: 24),
-            DefaultElevatedButton(label: 'Register', onPreessed: register),
+            DefaultElevatedButton(label: 'Register', onPressed: register),
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

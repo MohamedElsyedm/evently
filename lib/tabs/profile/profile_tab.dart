@@ -8,6 +8,8 @@ class ProfileTab extends StatelessWidget {
     Language(code: 'ar', name: 'العربية'),
   ];
 
+  ProfileTab({super.key});
+
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;

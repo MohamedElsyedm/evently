@@ -14,11 +14,7 @@ class LoveTab extends StatelessWidget {
           children: [
             DefaultTextFormField(
               hintText: 'Search For Event',
-<<<<<<< HEAD
-              prefixIconImageName: 'meeting',
-=======
-              prefixIconImageName: 'love',
->>>>>>> feature/profile
+              prefixIconImageName: 'search',
               onChanged: (query) {},
             ),
             SizedBox(height: 16),

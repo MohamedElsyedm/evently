@@ -26,7 +26,7 @@ class TabItem extends StatelessWidget {
       decoration: BoxDecoration(
         color: isSelected ? selectedBackgroundColor : Colors.transparent,
         borderRadius: BorderRadius.circular(46),
-        border: isSelected ? null : Border.all(color: AppTheme.white),
+        border: isSelected ? null : Border.all(color: selectedBackgroundColor),
       ),
       child: Row(
         children: [

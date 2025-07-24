@@ -1,3 +1,4 @@
+import 'package:evently/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -6,6 +7,7 @@ class DefaultTextFormField extends StatelessWidget {
   TextEditingController? controller;
   void Function(String)? onChanged;
   String? prefixIconImageName;
+  String? Function(String?)? validator;
 
   DefaultTextFormField({
     super.key,
@@ -13,6 +15,7 @@ class DefaultTextFormField extends StatelessWidget {
     this.controller,
     this.onChanged,
     this.prefixIconImageName,
+    this.validator,
   });
 
   @override
@@ -24,6 +27,7 @@ class DefaultTextFormField extends StatelessWidget {
         onChanged: onChanged,
         decoration: InputDecoration(
           hintText: hintText,
+          hintStyle: TextStyle(color: AppTheme.grey),
           prefixIcon: prefixIconImageName == null
               ? null
               : SvgPicture.asset(
@@ -33,6 +37,7 @@ class DefaultTextFormField extends StatelessWidget {
                   fit: BoxFit.scaleDown,
                 ),
         ),
+        validator: validator,
       ),
     );
   }
