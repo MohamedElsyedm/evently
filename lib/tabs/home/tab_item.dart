@@ -1,4 +1,3 @@
-import 'package:evently/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class TabItem extends StatelessWidget {
