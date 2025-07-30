@@ -18,7 +18,6 @@ class ProfileHeader extends StatelessWidget {
           children: [
             Image.asset(
               'assets/images/user_image.png',
-
               height: MediaQuery.sizeOf(context).height * 0.15,
               fit: BoxFit.fill,
             ),
