@@ -24,4 +24,8 @@ class FirebaseService {
         .get();
     return querySnapshot.docs.map((docSnapshot) => docSnapshot.data()).toList();
   }
+
+  static Future<void> deleteEvent(EventModel event) async {}
+
+  static Future<void> editEvent(EventModel event) async {}
 }
