@@ -4,7 +4,9 @@ import 'package:evently/tabs/home/tab_item.dart';
 import 'package:flutter/material.dart';
 
 class HomeHeader extends StatefulWidget {
-  const HomeHeader({super.key});
+  void Function(CategoryModel?) filterEvents;
+
+  HomeHeader({required this.filterEvents});
 
   @override
   State<HomeHeader> createState() => _HomeHeaderState();
@@ -44,6 +46,11 @@ class _HomeHeaderState extends State<HomeHeader> {
                 onTap: (value) {
                   if (value != index) {
                     index = value;
+                    CategoryModel? selectedCategory = index == 0
+                        ? null
+                        : CategoryModel.categories[index - 1];
+                    //filter events
+                    widget.filterEvents(selectedCategory);
                     setState(() {});
                   }
                 },

@@ -1,8 +1,12 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/models/event_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class EventItem extends StatelessWidget {
-  const EventItem({super.key});
+  EventModel event;
+
+  EventItem(this.event);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +17,7 @@ class EventItem extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: Image.asset(
-            'assets/images/sport.png',
+            'assets/images/${event.category.imageName}.png',
             height: screenSize.height * 0.25,
             width: double.infinity,
             fit: BoxFit.fill,
@@ -29,14 +33,14 @@ class EventItem extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                '21',
+                '${event.dateTime.day}',
                 style: textTheme.titleLarge!.copyWith(
                   color: AppTheme.primary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                'Nov',
+                DateFormat('MMM').format(event.dateTime),
                 style: textTheme.titleSmall!.copyWith(color: AppTheme.primary),
               ),
             ],
@@ -57,7 +61,7 @@ class EventItem extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    ' mohamed  mohamed mohamed mohaa mohamed mohamed mohamed mohamed mohamed mohamed',
+                    event.title,
                     style: textTheme.titleSmall!.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppTheme.black,
