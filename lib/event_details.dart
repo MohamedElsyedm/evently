@@ -1,5 +1,6 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/edit_event.dart';
+import 'package:evently/firebase_service.dart';
 import 'package:evently/models/event_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,9 +14,11 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
+  EventModel? event;
+
   @override
   Widget build(BuildContext context) {
-    EventModel event = ModalRoute.of(context)!.settings.arguments as EventModel;
+    event = ModalRoute.of(context)!.settings.arguments as EventModel;
     Size screenSize = MediaQuery.sizeOf(context);
     TextTheme textTheme = Theme.of(context).textTheme;
 
@@ -49,7 +52,7 @@ class _EventDetailsState extends State<EventDetails> {
           ClipRRect(
             borderRadius: BorderRadius.circular(16),
             child: Image.asset(
-              'assets/images/${event.category.imageName}.png',
+              'assets/images/${event!.category.imageName}.png',
               height: screenSize.height * 0.25,
               width: double.infinity,
               fit: BoxFit.fill,
@@ -58,7 +61,7 @@ class _EventDetailsState extends State<EventDetails> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16),
             child: Text(
-              event.title,
+              event!.title,
               style: textTheme.headlineSmall!.copyWith(color: AppTheme.primary),
             ),
           ),
@@ -84,13 +87,13 @@ class _EventDetailsState extends State<EventDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      DateFormat('d MMMM yyyy').format(event.dateTime),
+                      DateFormat('d MMMM yyyy').format(event!.dateTime),
                       style: textTheme.titleMedium!.copyWith(
                         color: AppTheme.primary,
                       ),
                     ),
                     Text(
-                      DateFormat('h:m a').format(event.dateTime),
+                      DateFormat('h:m a').format(event!.dateTime),
                       style: textTheme.titleMedium,
                     ),
                   ],
@@ -100,11 +103,15 @@ class _EventDetailsState extends State<EventDetails> {
           ),
           Text('Description', style: textTheme.titleMedium),
           SizedBox(height: 8),
-          Text(event.description, style: textTheme.titleMedium),
+          Text(event!.description, style: textTheme.titleMedium),
         ],
       ),
     );
   }
 
-  void deleteEvent() {}
+  void deleteEvent() {
+    FirebaseService.deleteEvent(event!).then((_) {
+      Navigator.pop(context);
+    });
+  }
 }
