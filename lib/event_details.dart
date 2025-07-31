@@ -1,12 +1,18 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/edit_event.dart';
 import 'package:evently/models/event_model.dart';
-import 'package:evently/widgets/default_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
-class EventDetails extends StatelessWidget {
+class EventDetails extends StatefulWidget {
   static const String routName = '/details screen';
+
+  @override
+  State<EventDetails> createState() => _EventDetailsState();
+}
+
+class _EventDetailsState extends State<EventDetails> {
   @override
   Widget build(BuildContext context) {
     EventModel event = ModalRoute.of(context)!.settings.arguments as EventModel;
@@ -18,7 +24,11 @@ class EventDetails extends StatelessWidget {
         title: Text('Event Details'),
         actions: [
           InkWell(
-            onTap: editEvent,
+            onTap: () {
+              Navigator.of(context)
+                  .pushNamed(EditEvent.routName, arguments: event)
+                  .then((_) => setState(() {}));
+            },
             child: Icon(
               Icons.edit_note_rounded,
               size: 24,
@@ -96,6 +106,5 @@ class EventDetails extends StatelessWidget {
     );
   }
 
-  void editEvent() {}
   void deleteEvent() {}
 }
