@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class HomeHeader extends StatefulWidget {
   void Function(CategoryModel?) filterEvents;
 
-  HomeHeader({required this.filterEvents});
+  HomeHeader({super.key, required this.filterEvents});
 
   @override
   State<HomeHeader> createState() => _HomeHeaderState();

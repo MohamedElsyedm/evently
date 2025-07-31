@@ -32,5 +32,10 @@ class FirebaseService {
     return doc.update(event.toJson());
   }
 
-  static Future<void> deleteEvent(EventModel event) async {}
+  static Future<void> deleteEvent(EventModel event) async {
+    CollectionReference<EventModel> eventsCollection = getEventCollection();
+    DocumentReference<EventModel> doc = eventsCollection.doc(event.id);
+    print(event.id);
+    return doc.delete();
+  }
 }

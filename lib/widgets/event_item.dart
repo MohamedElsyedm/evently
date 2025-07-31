@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 class EventItem extends StatelessWidget {
   EventModel event;
 
-  EventItem(this.event);
+  EventItem(this.event, {super.key});
 
   @override
   Widget build(BuildContext context) {
