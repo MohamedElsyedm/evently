@@ -25,54 +25,54 @@ class _RegisterScreenState extends State<RegisterScreen> {
     Size screenSize = MediaQuery.sizeOf(context);
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/splash.png',
-                height: screenSize.height * 0.2,
-                fit: BoxFit.fill,
-              ),
-              SizedBox(height: 24),
-              DefaultTextFormField(
-                hintText: 'Name',
-                prefixIconImageName: 'name',
-                controller: nameController,
-              ),
-              SizedBox(height: 16),
-              DefaultTextFormField(
-                hintText: 'Email',
-                prefixIconImageName: 'email',
-                controller: emailController,
-              ),
-              SizedBox(height: 16),
-              DefaultTextFormField(
-                hintText: 'Password',
-                prefixIconImageName: 'password',
-                controller: passwordController,
-              ),
-              SizedBox(height: 24),
-              DefaultElevatedButton(label: 'Register', onPressed: register),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Already Have Account?', style: textTheme.titleMedium),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(
-                        context,
-                      ).pushReplacementNamed(LoginScreen.routName);
-                    },
-                    child: Text('Login'),
-                  ),
-                ],
-              ),
-            ],
-          ),
+      resizeToAvoidBottomInset: false,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/splash.png',
+              height: screenSize.height * 0.2,
+              fit: BoxFit.fill,
+            ),
+            SizedBox(height: 24),
+            DefaultTextFormField(
+              hintText: 'Name',
+              prefixIconImageName: 'name',
+              controller: nameController,
+            ),
+            SizedBox(height: 16),
+            DefaultTextFormField(
+              hintText: 'Email',
+              prefixIconImageName: 'email',
+              controller: emailController,
+            ),
+            SizedBox(height: 16),
+            DefaultTextFormField(
+              hintText: 'Password',
+              prefixIconImageName: 'password',
+              controller: passwordController,
+              isPassword: true,
+            ),
+            SizedBox(height: 24),
+            DefaultElevatedButton(label: 'Register', onPressed: register),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Already Have Account?', style: textTheme.titleMedium),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(
+                      context,
+                    ).pushReplacementNamed(LoginScreen.routName);
+                  },
+                  child: Text('Login'),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
