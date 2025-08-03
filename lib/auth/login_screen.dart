@@ -1,5 +1,7 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/auth/register_screen.dart';
+import 'package:evently/firebase_service.dart';
+import 'package:evently/home_screen.dart';
 import 'package:evently/widgets/default_elevated_button.dart';
 import 'package:evently/widgets/default_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
     Size screenSize = MediaQuery.sizeOf(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
@@ -43,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
             DefaultTextFormField(
               hintText: 'Password',
               prefixIconImageName: 'password',
-              controller: emailController,
+              controller: passwordController,
             ),
             SizedBox(height: 24),
             DefaultElevatedButton(label: 'Login', onPressed: login),
@@ -119,5 +122,14 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void login() {}
+  void login() {
+    FirebaseService.login(
+      email: emailController.text,
+      password: passwordController.text,
+    ).then((user) {
+      if (mounted) {
+        Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+      }
+    });
+  }
 }

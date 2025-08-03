@@ -23,6 +23,7 @@ class DefaultTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
+        maxLines: null,
         controller: controller,
         onChanged: onChanged,
         decoration: InputDecoration(

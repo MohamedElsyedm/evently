@@ -30,7 +30,7 @@ class EventlyApp extends StatelessWidget {
         EditEvent.routName: (_) => EditEvent(),
       },
 
-      initialRoute: HomeScreen.routName,
+      initialRoute: LoginScreen.routName,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.light,
