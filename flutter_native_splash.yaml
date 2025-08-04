@@ -6,8 +6,8 @@ flutter_native_splash:
   branding_bottom_padding: 24
 
  
-  #color_dark: "#042a49"
-  #image_dark: assets/splash-invert.png
+  color_dark: "#101127"
+  # image_dark: assets/splash-invert.png
   #branding_dark: assets/dart_dark.png
 
   
@@ -17,6 +17,8 @@ flutter_native_splash:
     image: assets/images/android12splash.png
     branding: assets/images/branding.png
     branding_bottom_padding: 24
+    image_dark: assets/images/android12splash_dark.png
+    color_dark: "#101127"
 
 
    

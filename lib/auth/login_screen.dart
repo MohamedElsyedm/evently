@@ -62,6 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (value == null || value.length < 8) {
                     return 'Password must be at least 8 characters';
                   }
+                  return null;
                 },
                 isPassword: true,
               ),
@@ -153,6 +154,9 @@ class _LoginScreenState extends State<LoginScreen> {
             }
           })
           .catchError((error) {
+            print(
+              'nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn$error nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn',
+            );
             String? errorMessage;
             if (error is FirebaseAuthException) {
               //is => comparing type
