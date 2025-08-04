@@ -2,6 +2,7 @@ import 'package:evently/app_theme.dart';
 import 'package:evently/edit_event.dart';
 import 'package:evently/firebase_service.dart';
 import 'package:evently/models/event_model.dart';
+import 'package:evently/ui_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
@@ -112,8 +113,13 @@ class _EventDetailsState extends State<EventDetails> {
   }
 
   void deleteEvent() {
-    FirebaseService.deleteEvent(event!).then((_) {
-      Navigator.pop(context);
-    });
+    FirebaseService.deleteEvent(event!)
+        .then((_) {
+          UiUtils.showSuccessMessage('Event deleted successfully');
+          Navigator.pop(context);
+        })
+        .catchError((_) {
+          UiUtils.showErrorMessage('Something went wrong');
+        });
   }
 }
