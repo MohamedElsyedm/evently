@@ -20,6 +20,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,75 +31,97 @@ class _RegisterScreenState extends State<RegisterScreen> {
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/images/splash.png',
-              height: screenSize.height * 0.2,
-              fit: BoxFit.fill,
-            ),
-            SizedBox(height: 24),
-            DefaultTextFormField(
-              hintText: 'Name',
-              prefixIconImageName: 'name',
-              controller: nameController,
-            ),
-            SizedBox(height: 16),
-            DefaultTextFormField(
-              hintText: 'Email',
-              prefixIconImageName: 'email',
-              controller: emailController,
-            ),
-            SizedBox(height: 16),
-            DefaultTextFormField(
-              hintText: 'Password',
-              prefixIconImageName: 'password',
-              controller: passwordController,
-              isPassword: true,
-            ),
-            SizedBox(height: 24),
-            DefaultElevatedButton(label: 'Register', onPressed: register),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Already Have Account?', style: textTheme.titleMedium),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(
-                      context,
-                    ).pushReplacementNamed(LoginScreen.routName);
-                  },
-                  child: Text('Login'),
-                ),
-              ],
-            ),
-          ],
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/splash.png',
+                height: screenSize.height * 0.2,
+                fit: BoxFit.fill,
+              ),
+              SizedBox(height: 24),
+              DefaultTextFormField(
+                hintText: 'Name',
+                prefixIconImageName: 'name',
+                controller: nameController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Name is empty';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16),
+              DefaultTextFormField(
+                hintText: 'Email',
+                prefixIconImageName: 'email',
+                controller: emailController,
+                validator: (value) {
+                  if (value == null || value.length < 5) {
+                    return 'Invalid Email';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16),
+              DefaultTextFormField(
+                hintText: 'Password',
+                prefixIconImageName: 'password',
+                controller: passwordController,
+                validator: (value) {
+                  if (value == null || value.length < 8) {
+                    return 'Password must be at least 8 characters';
+                  }
+                },
+                isPassword: true,
+              ),
+              SizedBox(height: 24),
+              DefaultElevatedButton(label: 'Register', onPressed: register),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Already Have Account?', style: textTheme.titleMedium),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(
+                        context,
+                      ).pushReplacementNamed(LoginScreen.routName);
+                    },
+                    child: Text('Login'),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
   void register() {
-    FirebaseService.register(
-          name: nameController.text,
-          email: emailController.text,
-          password: passwordController.text,
-        )
-        .then((user) {
-          UiUtils.showSuccessMessage('Registered Successfully');
-          if (mounted) {
-            Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
-          }
-        })
-        .catchError((error) {
-          String? errorMessage;
-          if (error is FirebaseAuthException) {
-            //is => comparing type
-            errorMessage = error.message;
-          }
-          UiUtils.showErrorMessage(errorMessage);
-        });
+    if (formKey.currentState!.validate()) {
+      FirebaseService.register(
+            name: nameController.text,
+            email: emailController.text,
+            password: passwordController.text,
+          )
+          .then((user) {
+            UiUtils.showSuccessMessage('Registered Successfully');
+            if (mounted) {
+              Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+            }
+          })
+          .catchError((error) {
+            String? errorMessage;
+            if (error is FirebaseAuthException) {
+              //is => comparing type
+              errorMessage = error.message;
+            }
+            UiUtils.showErrorMessage(errorMessage);
+          });
+    }
   }
 }
