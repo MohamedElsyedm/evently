@@ -3,6 +3,7 @@ import 'package:evently/firebase_service.dart';
 import 'package:evently/models/category_model.dart';
 import 'package:evently/models/event_model.dart';
 import 'package:evently/tabs/home/tab_item.dart';
+import 'package:evently/ui_utils.dart';
 import 'package:evently/widgets/default_elevated_button.dart';
 import 'package:evently/widgets/default_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -238,9 +239,15 @@ class _EditEventState extends State<EditEvent> {
       );
       //how user know that date and time not selected ?
 
-      FirebaseService.editEvent(event).then((_) {
-        Navigator.of(context).pop();
-      });
+      FirebaseService.editEvent(event)
+          .then((_) {
+            UiUtils.showSuccessMessage('Event edited successfully');
+
+            Navigator.of(context).pop();
+          })
+          .catchError((_) {
+            UiUtils.showErrorMessage('Event failed to create');
+          });
     }
   }
 }
