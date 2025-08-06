@@ -6,8 +6,10 @@ import 'package:evently/edit_event.dart';
 import 'package:evently/event_details.dart';
 import 'package:evently/home_screen.dart';
 import 'package:evently/onboarding/onboarding_screen.dart';
+import 'package:evently/providers/events_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
@@ -17,7 +19,15 @@ Future<void> main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool onboardingComplete = prefs.getBool('onboarding_complete') ?? false;
 
-  runApp(EventlyApp(onboardingComplete: onboardingComplete));
+  ///cascade operator (..) separate operation or action (2 * 1)
+  ///one dot return
+  runApp(
+    ChangeNotifierProvider(
+      //called one time in create
+      create: (_) => EventsProvider()..getEvents(),
+      child: EventlyApp(onboardingComplete: onboardingComplete),
+    ),
+  );
 }
 
 class EventlyApp extends StatelessWidget {

@@ -1,13 +1,11 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/models/category_model.dart';
+import 'package:evently/providers/events_provider.dart';
 import 'package:evently/tabs/home/tab_item.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeHeader extends StatefulWidget {
-  void Function(CategoryModel?) filterEvents;
-
-  HomeHeader({super.key, required this.filterEvents});
-
   @override
   State<HomeHeader> createState() => _HomeHeaderState();
 }
@@ -17,6 +15,7 @@ class _HomeHeaderState extends State<HomeHeader> {
 
   @override
   Widget build(BuildContext context) {
+    EventsProvider eventsProvider = Provider.of<EventsProvider>(context);
     TextTheme textTheme = Theme.of(context).textTheme;
 
     return Container(
@@ -50,7 +49,7 @@ class _HomeHeaderState extends State<HomeHeader> {
                         ? null
                         : CategoryModel.categories[index - 1];
                     //filter events
-                    widget.filterEvents(selectedCategory);
+                    eventsProvider.filterEvents(selectedCategory);
                     setState(() {});
                   }
                 },
