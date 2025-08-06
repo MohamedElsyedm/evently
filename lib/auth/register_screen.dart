@@ -74,6 +74,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   if (value == null || value.length < 8) {
                     return 'Password must be at least 8 characters';
                   }
+                  return null;
                 },
                 isPassword: true,
               ),
