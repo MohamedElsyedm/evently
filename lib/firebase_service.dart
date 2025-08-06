@@ -98,7 +98,7 @@ class FirebaseService {
     });
   }
 
-  static Future<void> removeEventToFavorite(String eventId) async {
+  static Future<void> removeEventFromFavorite(String eventId) async {
     CollectionReference<UserModel> userCollection = getUserCollection();
     DocumentReference<UserModel> userDoc = userCollection.doc(
       FirebaseAuth.instance.currentUser!.uid,

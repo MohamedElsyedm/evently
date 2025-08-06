@@ -13,6 +13,7 @@ class OnboardingItem extends StatelessWidget {
     TextTheme textTheme = Theme.of(context).textTheme;
     Size screenSize = MediaQuery.sizeOf(context);
 
+<<<<<<< HEAD
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -37,6 +38,29 @@ class OnboardingItem extends StatelessWidget {
           Text(itemsList[index].description, style: textTheme.titleMedium),
         ],
       ),
+=======
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Image.asset(
+          'assets/images/onboarding_${itemsList[index].imgName}.png',
+          width: screenSize.width,
+          height: screenSize.height * 0.35,
+          fit: BoxFit.fill,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: screenSize.height * 0.03),
+          child: Text(
+            itemsList[index].title,
+            style: textTheme.titleLarge!.copyWith(
+              color: AppTheme.primary,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+        Text(itemsList[index].description, style: textTheme.titleMedium),
+      ],
+>>>>>>> feature/love
     );
   }
 }
