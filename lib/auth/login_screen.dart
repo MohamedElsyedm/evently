@@ -2,11 +2,13 @@ import 'package:evently/app_theme.dart';
 import 'package:evently/auth/register_screen.dart';
 import 'package:evently/firebase_service.dart';
 import 'package:evently/home_screen.dart';
+import 'package:evently/providers/user_provider.dart';
 import 'package:evently/ui_utils.dart';
 import 'package:evently/widgets/default_elevated_button.dart';
 import 'package:evently/widgets/default_text_form_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routName = '/login screen';
@@ -148,6 +150,10 @@ class _LoginScreenState extends State<LoginScreen> {
             password: passwordController.text,
           )
           .then((user) {
+            Provider.of<UserProvider>(
+              context,
+              listen: false,
+            ).updateCurrentUser(user);
             UiUtils.showSuccessMessage('Login Successfully');
             if (mounted) {
               Navigator.of(context).pushReplacementNamed(HomeScreen.routName);

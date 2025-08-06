@@ -7,6 +7,7 @@ import 'package:evently/event_details.dart';
 import 'package:evently/home_screen.dart';
 import 'package:evently/onboarding/onboarding_screen.dart';
 import 'package:evently/providers/events_provider.dart';
+import 'package:evently/providers/user_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,9 +23,12 @@ Future<void> main() async {
   ///cascade operator (..) separate operation or action (2 * 1)
   ///one dot return
   runApp(
-    ChangeNotifierProvider(
+    MultiProvider(
       //called one time in create
-      create: (_) => EventsProvider()..getEvents(),
+      providers: [
+        Provider<UserProvider>(create: (_) => UserProvider()),
+        Provider<EventsProvider>(create: (_) => EventsProvider()..getEvents()),
+      ],
       child: EventlyApp(onboardingComplete: onboardingComplete),
     ),
   );
