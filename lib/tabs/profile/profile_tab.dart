@@ -1,6 +1,7 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/auth/login_screen.dart';
 import 'package:evently/firebase_service.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/settings_provider.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:evently/tabs/profile/profile_header.dart';
@@ -33,7 +34,7 @@ class ProfileTab extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Language',
+                      AppLocalizations.of(context)!.language,
                       style: textTheme.titleLarge!.copyWith(
                         fontWeight: FontWeight.bold,
                         color: settingsProvider.isDark
@@ -49,7 +50,7 @@ class ProfileTab extends StatelessWidget {
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: DropdownButton(
-                        value: 'en',
+                        value: settingsProvider.languageCode,
                         items: languages
                             .map(
                               (Language) => DropdownMenuItem(
@@ -64,7 +65,10 @@ class ProfileTab extends StatelessWidget {
                               ),
                             )
                             .toList(),
-                        onChanged: (value) {},
+                        onChanged: (languageCode) {
+                          if (languageCode == null) return;
+                          settingsProvider.changeLanguage(languageCode);
+                        },
                         borderRadius: BorderRadius.circular(16),
                         underline: SizedBox(),
                         iconEnabledColor: AppTheme.primary,
@@ -77,7 +81,7 @@ class ProfileTab extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Dark Theme',
+                      AppLocalizations.of(context)!.darkTheme,
                       style: textTheme.titleLarge!.copyWith(
                         fontWeight: FontWeight.bold,
                         color: settingsProvider.isDark
@@ -122,7 +126,10 @@ class ProfileTab extends StatelessWidget {
                       children: [
                         Icon(Icons.logout, size: 24, color: AppTheme.white),
                         SizedBox(width: 8),
-                        Text('Logout', style: textTheme.titleLarge),
+                        Text(
+                          AppLocalizations.of(context)!.logout,
+                          style: textTheme.titleLarge,
+                        ),
                       ],
                     ),
                   ),

@@ -3,7 +3,6 @@ import 'package:evently/onboarding/dot_indicator.dart';
 import 'package:evently/onboarding/onboarding_item.dart';
 import 'package:evently/onboarding/onboarding_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class OnboardingScreen extends StatefulWidget {
   static const String routName = '/onboarding_screen';

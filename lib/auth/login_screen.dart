@@ -2,6 +2,7 @@ import 'package:evently/app_theme.dart';
 import 'package:evently/auth/register_screen.dart';
 import 'package:evently/firebase_service.dart';
 import 'package:evently/home_screen.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:evently/ui_utils.dart';
 import 'package:evently/widgets/default_elevated_button.dart';
@@ -45,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 24),
               DefaultTextFormField(
-                hintText: 'Email',
+                hintText: AppLocalizations.of(context)!.email,
                 prefixIconImageName: 'email',
                 controller: emailController,
                 validator: (value) {
@@ -57,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 16),
               DefaultTextFormField(
-                hintText: 'Password',
+                hintText: AppLocalizations.of(context)!.password,
                 prefixIconImageName: 'password',
                 controller: passwordController,
                 validator: (value) {
@@ -69,19 +70,25 @@ class _LoginScreenState extends State<LoginScreen> {
                 isPassword: true,
               ),
               SizedBox(height: 24),
-              DefaultElevatedButton(label: 'Login', onPressed: login),
+              DefaultElevatedButton(
+                label: AppLocalizations.of(context)!.login,
+                onPressed: login,
+              ),
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Don’t Have Account?', style: textTheme.titleMedium),
+                  Text(
+                    AppLocalizations.of(context)!.dontHaveAccount,
+                    style: textTheme.titleMedium,
+                  ),
                   TextButton(
                     onPressed: () {
                       Navigator.of(
                         context,
                       ).pushReplacementNamed(RegisterScreen.routName);
                     },
-                    child: Text('Create Account'),
+                    child: Text(AppLocalizations.of(context)!.createAccount),
                   ),
                 ],
               ),

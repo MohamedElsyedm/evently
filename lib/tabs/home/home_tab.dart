@@ -1,4 +1,3 @@
-import 'package:evently/event_details.dart';
 import 'package:evently/providers/events_provider.dart';
 import 'package:evently/tabs/home/home_header.dart';
 import 'package:evently/widgets/event_item.dart';

@@ -1,5 +1,4 @@
 import 'package:evently/app_theme.dart';
-import 'package:evently/providers/settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

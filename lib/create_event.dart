@@ -1,11 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently/app_theme.dart';
-import 'package:evently/firebase_service.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/category_model.dart';
 import 'package:evently/models/event_model.dart';
+import 'package:evently/providers/events_provider.dart';
 import 'package:evently/providers/settings_provider.dart';
 import 'package:evently/tabs/home/tab_item.dart';
-import 'package:evently/ui_utils.dart';
 import 'package:evently/widgets/default_elevated_button.dart';
 import 'package:evently/widgets/default_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +39,7 @@ class _CreateEventState extends State<CreateEvent> {
     TextTheme textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      appBar: AppBar(title: Text('Create Event')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.createEvent)),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,10 +97,13 @@ class _CreateEventState extends State<CreateEvent> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Title', style: textTheme.titleMedium),
+                    Text(
+                      AppLocalizations.of(context)!.title,
+                      style: textTheme.titleMedium,
+                    ),
                     SizedBox(height: 8),
                     DefaultTextFormField(
-                      hintText: 'Event Title',
+                      hintText: AppLocalizations.of(context)!.title,
                       prefixIconImageName: 'title',
                       controller: titleController,
                       validator: (value) {
@@ -112,10 +114,13 @@ class _CreateEventState extends State<CreateEvent> {
                       },
                     ),
                     SizedBox(height: 16),
-                    Text('Description', style: textTheme.titleMedium),
+                    Text(
+                      AppLocalizations.of(context)!.description,
+                      style: textTheme.titleMedium,
+                    ),
                     SizedBox(height: 8),
                     DefaultTextFormField(
-                      hintText: 'Event Description',
+                      hintText: AppLocalizations.of(context)!.description,
                       controller: descriptionController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -137,7 +142,10 @@ class _CreateEventState extends State<CreateEvent> {
                           ),
                         ),
                         SizedBox(width: 10),
-                        Text('Event Date', style: textTheme.titleMedium),
+                        Text(
+                          AppLocalizations.of(context)!.eventDate,
+                          style: textTheme.titleMedium,
+                        ),
                         Spacer(),
                         InkWell(
                           onTap: () async {
@@ -155,7 +163,7 @@ class _CreateEventState extends State<CreateEvent> {
                           },
                           child: Text(
                             selectedDate == null
-                                ? 'Choose Date'
+                                ? AppLocalizations.of(context)!.chooseDate
                                 : dateFormat.format(selectedDate!),
                             style: textTheme.titleMedium!.copyWith(
                               color: AppTheme.primary,
@@ -177,7 +185,10 @@ class _CreateEventState extends State<CreateEvent> {
                           ),
                         ),
                         SizedBox(width: 10),
-                        Text('Event Time', style: textTheme.titleMedium),
+                        Text(
+                          AppLocalizations.of(context)!.eventTime,
+                          style: textTheme.titleMedium,
+                        ),
                         Spacer(),
                         InkWell(
                           onTap: () async {
@@ -192,7 +203,7 @@ class _CreateEventState extends State<CreateEvent> {
                           },
                           child: Text(
                             selectedTime == null
-                                ? 'Choose Time'
+                                ? AppLocalizations.of(context)!.chooseTime
                                 : selectedTime!.format(context),
                             style: textTheme.titleMedium!.copyWith(
                               color: AppTheme.primary,
@@ -203,7 +214,7 @@ class _CreateEventState extends State<CreateEvent> {
                     ),
                     SizedBox(height: 24),
                     DefaultElevatedButton(
-                      label: 'Add Event',
+                      label: AppLocalizations.of(context)!.createEvent,
                       onPressed: createEvent,
                     ),
                   ],
@@ -234,15 +245,8 @@ class _CreateEventState extends State<CreateEvent> {
         description: descriptionController.text,
         dateTime: dateTime,
       );
-      //how user know that date and time not selected ?
-      FirebaseService.createEvent(event)
-          .then((_) {
-            Navigator.of(context).pop();
-            UiUtils.showSuccessMessage('Event created successfully');
-          })
-          .catchError((_) {
-            UiUtils.showErrorMessage('Failed to create event');
-          });
+      Provider.of<EventsProvider>(context, listen: false).addEvent(event);
+      Navigator.of(context).pop();
     }
   }
 }

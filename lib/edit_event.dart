@@ -1,14 +1,15 @@
 import 'package:evently/app_theme.dart';
-import 'package:evently/firebase_service.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/category_model.dart';
 import 'package:evently/models/event_model.dart';
+import 'package:evently/providers/events_provider.dart';
 import 'package:evently/tabs/home/tab_item.dart';
-import 'package:evently/ui_utils.dart';
 import 'package:evently/widgets/default_elevated_button.dart';
 import 'package:evently/widgets/default_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class EditEvent extends StatefulWidget {
   static const String routName = '/edit event';
@@ -50,7 +51,7 @@ class _EditEventState extends State<EditEvent> {
     TextTheme textTheme = Theme.of(context).textTheme;
     // print(event!.title);
     return Scaffold(
-      appBar: AppBar(title: Text('Edit Event')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.editEvent)),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +107,10 @@ class _EditEventState extends State<EditEvent> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Title', style: textTheme.titleMedium),
+                    Text(
+                      AppLocalizations.of(context)!.title,
+                      style: textTheme.titleMedium,
+                    ),
                     SizedBox(height: 8),
                     DefaultTextFormField(
                       hintText: 'Event Title',
@@ -120,7 +124,10 @@ class _EditEventState extends State<EditEvent> {
                       },
                     ),
                     SizedBox(height: 16),
-                    Text('Description', style: textTheme.titleMedium),
+                    Text(
+                      AppLocalizations.of(context)!.description,
+                      style: textTheme.titleMedium,
+                    ),
                     SizedBox(height: 8),
                     DefaultTextFormField(
                       hintText: 'Event Description',
@@ -138,7 +145,7 @@ class _EditEventState extends State<EditEvent> {
                         SvgPicture.asset('assets/icons/date.svg'),
                         SizedBox(width: 10),
                         Text(
-                          'Event Date',
+                          AppLocalizations.of(context)!.eventDate,
                           style: textTheme.titleMedium!.copyWith(
                             color: AppTheme.primary,
                           ),
@@ -160,7 +167,7 @@ class _EditEventState extends State<EditEvent> {
                           },
                           child: Text(
                             selectedDate == null
-                                ? 'Choose Date'
+                                ? AppLocalizations.of(context)!.chooseDate
                                 : dateFormat.format(selectedDate!),
                             style: textTheme.titleMedium!.copyWith(
                               color: AppTheme.primary,
@@ -175,7 +182,7 @@ class _EditEventState extends State<EditEvent> {
                         SvgPicture.asset('assets/icons/time.svg'),
                         SizedBox(width: 10),
                         Text(
-                          'Event Time',
+                          AppLocalizations.of(context)!.eventTime,
                           style: textTheme.titleMedium!.copyWith(
                             color: AppTheme.primary,
                           ),
@@ -194,7 +201,7 @@ class _EditEventState extends State<EditEvent> {
                           },
                           child: Text(
                             selectedTime == null
-                                ? 'Choose Time'
+                                ? AppLocalizations.of(context)!.chooseTime
                                 : selectedTime!.format(context),
                             style: textTheme.titleMedium!.copyWith(
                               color: AppTheme.primary,
@@ -205,7 +212,7 @@ class _EditEventState extends State<EditEvent> {
                     ),
                     SizedBox(height: 24),
                     DefaultElevatedButton(
-                      label: 'Edit Event',
+                      label: AppLocalizations.of(context)!.editEvent,
                       onPressed: editEvent,
                     ),
                   ],
@@ -237,17 +244,9 @@ class _EditEventState extends State<EditEvent> {
         description: descriptionController.text,
         dateTime: dateTime,
       );
+      Provider.of<EventsProvider>(context, listen: false).editEvent(event);
       //how user know that date and time not selected ?
-
-      FirebaseService.editEvent(event)
-          .then((_) {
-            UiUtils.showSuccessMessage('Event edited successfully');
-
-            Navigator.of(context).pop();
-          })
-          .catchError((_) {
-            UiUtils.showErrorMessage('Event failed to create');
-          });
+      Navigator.of(context).pop();
     }
   }
 }
