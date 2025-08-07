@@ -20,6 +20,8 @@ Future<void> main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool onboardingComplete = prefs.getBool('onboarding_complete') ?? false;
 
+  Provider.debugCheckInvalidValueType = null;
+
   ///cascade operator (..) separate operation or action (2 * 1)
   ///one dot return
   runApp(

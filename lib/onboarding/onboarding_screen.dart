@@ -8,12 +8,14 @@ import 'package:flutter_svg/svg.dart';
 class OnboardingScreen extends StatefulWidget {
   static const String routName = '/onboarding_screen';
 
+  const OnboardingScreen({super.key});
+
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  PageController _controller = PageController();
+  final PageController _controller = PageController();
   int pageIndex = 0;
 
   @override

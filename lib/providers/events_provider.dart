@@ -17,9 +17,13 @@ class EventsProvider with ChangeNotifier {
   }
 
   void filterEvents(CategoryModel? category) {
-    displayedEvents = category == null
-        ? allEvents
-        : allEvents.where((event) => event.category == category).toList();
+    if (category == null) {
+      displayedEvents = allEvents;
+    } else {
+      displayedEvents = allEvents
+          .where((event) => event.category == category)
+          .toList();
+    }
     notifyListeners();
   }
 
