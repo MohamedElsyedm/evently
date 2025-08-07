@@ -1,0 +1,21 @@
+{
+    "login":"Login",
+    "createAccount": "Create Account",
+    "logout": "Logout",
+    "dontHaveAccount": "Don’t Have Account?",
+    "password":"Password",
+    "email":"ُEmail",
+    "alreadyHaveAccount":"Already Have Account?",
+    "name":"Name",
+    "language":"Language",
+    "darkTheme":"Dark Theme",
+    "eventDetails":"Event Details",
+    "description":"Description",
+    "createEvent":"Create Event",
+    "title":"Title",
+    "chooseDate":"Choose Date",
+    "eventDate":"Event Date",
+     "eventTime":"Event Time",
+    "chooseTime":"Choose Time",
+    "editEvent":"Edit Event"
+}

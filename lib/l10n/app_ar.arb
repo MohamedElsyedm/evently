@@ -1,0 +1,21 @@
+{
+    "login":"تسجيل الدخول",
+    "createAccount": "إنشاء حساب",
+    "logout": "تسجيل خروج",
+    "dontHaveAccount": " ليس لديك حساب ؟",
+    "password":"رقم سرى",
+    "email":"البريد الإلكترونى",
+    "alreadyHaveAccount":"بالفعل لديك حساب ؟",
+    "name":"اسم المستخدم",
+    "language":"اللغة",
+    "darkTheme":"الوضع المظلم",
+    "eventDetails":"تفاصيل الحدث",
+    "description":"الوصف",
+    "createEvent":"إنشاء حدث",
+    "title": "العنوان",
+    "chooseDate": "اختر تاريخ",
+    "eventDate" : "تاريخ الحدث",
+    "eventTime":"وقت الحدث",
+    "chooseTime":"اختر وقت",
+    "editEvent":"تعديل الحدث"
+}

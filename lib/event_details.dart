@@ -1,11 +1,12 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/edit_event.dart';
-import 'package:evently/firebase_service.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/event_model.dart';
-import 'package:evently/ui_utils.dart';
+import 'package:evently/providers/events_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class EventDetails extends StatefulWidget {
   static const String routName = '/details screen';
@@ -27,13 +28,13 @@ class _EventDetailsState extends State<EventDetails> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Event Details'),
+        title: Text(AppLocalizations.of(context)!.eventDetails),
         actions: [
           InkWell(
             onTap: () {
-              Navigator.of(context)
-                  .pushNamed(EditEvent.routName, arguments: event)
-                  .then((_) => setState(() {}));
+              Navigator.of(
+                context,
+              ).pushReplacementNamed(EditEvent.routName, arguments: event);
             },
             child: Icon(
               Icons.edit_note_rounded,
@@ -104,7 +105,10 @@ class _EventDetailsState extends State<EventDetails> {
               ],
             ),
           ),
-          Text('Description', style: textTheme.titleMedium),
+          Text(
+            AppLocalizations.of(context)!.description,
+            style: textTheme.titleMedium,
+          ),
           SizedBox(height: 8),
           Text(event!.description, style: textTheme.titleMedium),
         ],
@@ -113,13 +117,7 @@ class _EventDetailsState extends State<EventDetails> {
   }
 
   void deleteEvent() {
-    FirebaseService.deleteEvent(event!)
-        .then((_) {
-          UiUtils.showSuccessMessage('Event deleted successfully');
-          Navigator.pop(context);
-        })
-        .catchError((_) {
-          UiUtils.showErrorMessage('Something went wrong');
-        });
+    Provider.of<EventsProvider>(context, listen: false).deleteEvent(event!);
+    Navigator.pop(context);
   }
 }
