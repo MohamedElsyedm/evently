@@ -1,4 +1,5 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/providers/settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -35,6 +36,7 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
         maxLines: widget.isPassword ? 1 : null,
         controller: widget.controller,
         onChanged: widget.onChanged,
+        style: Theme.of(context).textTheme.titleMedium,
         decoration: InputDecoration(
           hintText: widget.hintText,
           hintStyle: TextStyle(color: AppTheme.grey),

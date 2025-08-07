@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently/app_theme.dart';
 import 'package:evently/firebase_service.dart';
 import 'package:evently/models/category_model.dart';
 import 'package:evently/models/event_model.dart';
+import 'package:evently/providers/settings_provider.dart';
 import 'package:evently/tabs/home/tab_item.dart';
 import 'package:evently/ui_utils.dart';
 import 'package:evently/widgets/default_elevated_button.dart';
@@ -9,6 +11,7 @@ import 'package:evently/widgets/default_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class CreateEvent extends StatefulWidget {
   static const routName = '/create-event';
@@ -33,6 +36,7 @@ class _CreateEventState extends State<CreateEvent> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     TextTheme textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
@@ -70,7 +74,9 @@ class _CreateEventState extends State<CreateEvent> {
                         isSelected:
                             currentIndex ==
                             CategoryModel.categories.indexOf(category),
-                        selectedForegroundColor: AppTheme.white,
+                        selectedForegroundColor: settingsProvider.isDark
+                            ? AppTheme.black
+                            : AppTheme.white,
                         unSelectedForegroundColor: AppTheme.primary,
                         selectedBackgroundColor: AppTheme.primary,
                       ),
@@ -121,14 +127,17 @@ class _CreateEventState extends State<CreateEvent> {
                     SizedBox(height: 16),
                     Row(
                       children: [
-                        SvgPicture.asset('assets/icons/date.svg'),
-                        SizedBox(width: 10),
-                        Text(
-                          'Event Date',
-                          style: textTheme.titleMedium!.copyWith(
-                            color: AppTheme.primary,
+                        SvgPicture.asset(
+                          'assets/icons/date.svg',
+                          colorFilter: ColorFilter.mode(
+                            settingsProvider.isDark
+                                ? AppTheme.white
+                                : AppTheme.black,
+                            BlendMode.srcIn,
                           ),
                         ),
+                        SizedBox(width: 10),
+                        Text('Event Date', style: textTheme.titleMedium),
                         Spacer(),
                         InkWell(
                           onTap: () async {
@@ -158,14 +167,17 @@ class _CreateEventState extends State<CreateEvent> {
                     SizedBox(height: 16),
                     Row(
                       children: [
-                        SvgPicture.asset('assets/icons/time.svg'),
-                        SizedBox(width: 10),
-                        Text(
-                          'Event Time',
-                          style: textTheme.titleMedium!.copyWith(
-                            color: AppTheme.primary,
+                        SvgPicture.asset(
+                          'assets/icons/time.svg',
+                          colorFilter: ColorFilter.mode(
+                            settingsProvider.isDark
+                                ? AppTheme.white
+                                : AppTheme.black,
+                            BlendMode.srcIn,
                           ),
                         ),
+                        SizedBox(width: 10),
+                        Text('Event Time', style: textTheme.titleMedium),
                         Spacer(),
                         InkWell(
                           onTap: () async {
