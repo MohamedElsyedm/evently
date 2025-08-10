@@ -101,6 +101,10 @@ class _CreateEventState extends State<CreateEvent> {
                       AppLocalizations.of(context)!.title,
                       style: textTheme.titleMedium,
                     ),
+                    Text(
+                      AppLocalizations.of(context)!.title,
+                      style: textTheme.titleMedium,
+                    ),
                     SizedBox(height: 8),
                     DefaultTextFormField(
                       hintText: AppLocalizations.of(context)!.title,
@@ -114,6 +118,10 @@ class _CreateEventState extends State<CreateEvent> {
                       },
                     ),
                     SizedBox(height: 16),
+                    Text(
+                      AppLocalizations.of(context)!.description,
+                      style: textTheme.titleMedium,
+                    ),
                     Text(
                       AppLocalizations.of(context)!.description,
                       style: textTheme.titleMedium,
@@ -245,6 +253,8 @@ class _CreateEventState extends State<CreateEvent> {
         description: descriptionController.text,
         dateTime: dateTime,
       );
+      Provider.of<EventsProvider>(context, listen: false).addEvent(event);
+      Navigator.of(context).pop();
       Provider.of<EventsProvider>(context, listen: false).addEvent(event);
       Navigator.of(context).pop();
     }
