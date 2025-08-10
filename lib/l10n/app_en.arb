@@ -17,5 +17,19 @@
     "eventDate":"Event Date",
      "eventTime":"Event Time",
     "chooseTime":"Choose Time",
-    "editEvent":"Edit Event"
+    "editEvent":"Edit Event",
+    "descriptionError":"Description can not be null",
+    "titleError":"Title can not be null",
+    "welcomeBack":"Welcome Back",
+    "all":"All",
+    "sport":"Sport",
+    "birthday":"Birthday",
+    "gaming":"Gaming",
+    "holiday":"Holiday",
+    "meeting":"Meeting",
+    "workshop":"Workshop",
+    "exhibition":"Exhibition",
+    "eating":"Eating",
+    "bookCub":"BookClub",
+    "searchForEvent":"Search For Event"
 }

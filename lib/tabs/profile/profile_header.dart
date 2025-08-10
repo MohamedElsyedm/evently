@@ -14,7 +14,9 @@ class ProfileHeader extends StatelessWidget {
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AppTheme.primary,
-        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(64)),
+        borderRadius: BorderRadiusDirectional.only(
+          bottomStart: Radius.circular(64),
+        ),
       ),
       child: SafeArea(
         child: Row(

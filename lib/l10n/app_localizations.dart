@@ -211,6 +211,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Edit Event'**
   String get editEvent;
+
+  /// No description provided for @descriptionError.
+  ///
+  /// In en, this message translates to:
+  /// **'Description can not be null'**
+  String get descriptionError;
+
+  /// No description provided for @titleError.
+  ///
+  /// In en, this message translates to:
+  /// **'Title can not be null'**
+  String get titleError;
+
+  /// No description provided for @welcomeBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome Back'**
+  String get welcomeBack;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @sport.
+  ///
+  /// In en, this message translates to:
+  /// **'Sport'**
+  String get sport;
+
+  /// No description provided for @birthday.
+  ///
+  /// In en, this message translates to:
+  /// **'Birthday'**
+  String get birthday;
+
+  /// No description provided for @gaming.
+  ///
+  /// In en, this message translates to:
+  /// **'Gaming'**
+  String get gaming;
+
+  /// No description provided for @holiday.
+  ///
+  /// In en, this message translates to:
+  /// **'Holiday'**
+  String get holiday;
+
+  /// No description provided for @meeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Meeting'**
+  String get meeting;
+
+  /// No description provided for @workshop.
+  ///
+  /// In en, this message translates to:
+  /// **'Workshop'**
+  String get workshop;
+
+  /// No description provided for @exhibition.
+  ///
+  /// In en, this message translates to:
+  /// **'Exhibition'**
+  String get exhibition;
+
+  /// No description provided for @eating.
+  ///
+  /// In en, this message translates to:
+  /// **'Eating'**
+  String get eating;
+
+  /// No description provided for @bookCub.
+  ///
+  /// In en, this message translates to:
+  /// **'BookClub'**
+  String get bookCub;
+
+  /// No description provided for @searchForEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'Search For Event'**
+  String get searchForEvent;
 }
 
 class _AppLocalizationsDelegate

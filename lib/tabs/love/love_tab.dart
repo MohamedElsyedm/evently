@@ -1,3 +1,4 @@
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/events_provider.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:evently/widgets/default_text_form_field.dart';
@@ -38,7 +39,7 @@ class _LoveTabState extends State<LoveTab> {
         child: Column(
           children: [
             DefaultTextFormField(
-              hintText: 'Search For Event',
+              hintText: AppLocalizations.of(context)!.searchForEvent,
               prefixIconImageName: 'search',
               onChanged: (query) {},
             ),

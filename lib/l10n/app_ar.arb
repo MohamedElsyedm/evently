@@ -17,5 +17,19 @@
     "eventDate" : "تاريخ الحدث",
     "eventTime":"وقت الحدث",
     "chooseTime":"اختر وقت",
-    "editEvent":"تعديل الحدث"
+    "editEvent":"تعديل الحدث",
+    "descriptionError": "الوصف لا يمكن ان يكون فارغاً",
+    "titleError":"العنوان لا يمكن ان يكون فارغا",
+    "welcomeBack":"أهلا بالعودة",
+    "all":"الكل",
+     "sport":"الرياضة",
+    "birthday":"عيد الميلاد",
+    "gaming":"الالعاب",
+    "holiday":"الاجازة",
+    "meeting":"الاجتماع",
+    "workshop":"العمل",
+    "exhibition":"العادات",
+    "eating":"الاكل",
+    "bookCub":"ناى الكتب",
+    "searchForEvent":"ابحث عن حدثك المفضل"
 }

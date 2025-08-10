@@ -64,4 +64,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get editEvent => 'Edit Event';
+
+  @override
+  String get descriptionError => 'Description can not be null';
+
+  @override
+  String get titleError => 'Title can not be null';
+
+  @override
+  String get welcomeBack => 'Welcome Back';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get sport => 'Sport';
+
+  @override
+  String get birthday => 'Birthday';
+
+  @override
+  String get gaming => 'Gaming';
+
+  @override
+  String get holiday => 'Holiday';
+
+  @override
+  String get meeting => 'Meeting';
+
+  @override
+  String get workshop => 'Workshop';
+
+  @override
+  String get exhibition => 'Exhibition';
+
+  @override
+  String get eating => 'Eating';
+
+  @override
+  String get bookCub => 'BookClub';
+
+  @override
+  String get searchForEvent => 'Search For Event';
 }

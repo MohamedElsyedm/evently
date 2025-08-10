@@ -1,4 +1,5 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/category_model.dart';
 import 'package:evently/providers/events_provider.dart';
 import 'package:evently/providers/settings_provider.dart';
@@ -38,7 +39,10 @@ class _HomeHeaderState extends State<HomeHeader> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Welcome Back ✨', style: textTheme.titleSmall),
+            Text(
+              '${AppLocalizations.of(context)!.welcomeBack} ✨',
+              style: textTheme.titleSmall,
+            ),
             Text(
               Provider.of<UserProvider>(context).currentUser!.name,
               style: textTheme.headlineSmall,

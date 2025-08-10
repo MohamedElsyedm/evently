@@ -113,12 +113,12 @@ class _EditEventState extends State<EditEvent> {
                     ),
                     SizedBox(height: 8),
                     DefaultTextFormField(
-                      hintText: 'Event Title',
+                      hintText: AppLocalizations.of(context)!.title,
                       prefixIconImageName: 'title',
                       controller: titleController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Title can not be null';
+                          return AppLocalizations.of(context)!.titleError;
                         }
                         return null;
                       },
@@ -130,11 +130,11 @@ class _EditEventState extends State<EditEvent> {
                     ),
                     SizedBox(height: 8),
                     DefaultTextFormField(
-                      hintText: 'Event Description',
+                      hintText: AppLocalizations.of(context)!.description,
                       controller: descriptionController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Description can not be null';
+                          return AppLocalizations.of(context)!.descriptionError;
                         }
                         return null;
                       },

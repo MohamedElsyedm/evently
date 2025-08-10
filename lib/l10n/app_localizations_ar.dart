@@ -64,4 +64,46 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get editEvent => 'تعديل الحدث';
+
+  @override
+  String get descriptionError => 'الوصف لا يمكن ان يكون فارغاً';
+
+  @override
+  String get titleError => 'العنوان لا يمكن ان يكون فارغا';
+
+  @override
+  String get welcomeBack => 'أهلا بالعودة';
+
+  @override
+  String get all => 'الكل';
+
+  @override
+  String get sport => 'الرياضة';
+
+  @override
+  String get birthday => 'عيد الميلاد';
+
+  @override
+  String get gaming => 'الالعاب';
+
+  @override
+  String get holiday => 'الاجازة';
+
+  @override
+  String get meeting => 'الاجتماع';
+
+  @override
+  String get workshop => 'العمل';
+
+  @override
+  String get exhibition => 'العادات';
+
+  @override
+  String get eating => 'الاكل';
+
+  @override
+  String get bookCub => 'ناى الكتب';
+
+  @override
+  String get searchForEvent => 'ابحث عن حدثك المفضل';
 }
