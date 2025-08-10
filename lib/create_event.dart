@@ -3,6 +3,7 @@ import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/category_model.dart';
 import 'package:evently/models/event_model.dart';
 import 'package:evently/providers/events_provider.dart';
+import 'package:evently/providers/events_provider.dart';
 import 'package:evently/providers/settings_provider.dart';
 import 'package:evently/tabs/home/tab_item.dart';
 import 'package:evently/widgets/default_elevated_button.dart';
@@ -39,6 +40,7 @@ class _CreateEventState extends State<CreateEvent> {
     TextTheme textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.createEvent)),
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.createEvent)),
       body: SingleChildScrollView(
         child: Column(
@@ -101,8 +103,13 @@ class _CreateEventState extends State<CreateEvent> {
                       AppLocalizations.of(context)!.title,
                       style: textTheme.titleMedium,
                     ),
+                    Text(
+                      AppLocalizations.of(context)!.title,
+                      style: textTheme.titleMedium,
+                    ),
                     SizedBox(height: 8),
                     DefaultTextFormField(
+                      hintText: AppLocalizations.of(context)!.title,
                       hintText: AppLocalizations.of(context)!.title,
                       prefixIconImageName: 'title',
                       controller: titleController,
@@ -118,8 +125,13 @@ class _CreateEventState extends State<CreateEvent> {
                       AppLocalizations.of(context)!.description,
                       style: textTheme.titleMedium,
                     ),
+                    Text(
+                      AppLocalizations.of(context)!.description,
+                      style: textTheme.titleMedium,
+                    ),
                     SizedBox(height: 8),
                     DefaultTextFormField(
+                      hintText: AppLocalizations.of(context)!.description,
                       hintText: AppLocalizations.of(context)!.description,
                       controller: descriptionController,
                       validator: (value) {
@@ -146,6 +158,10 @@ class _CreateEventState extends State<CreateEvent> {
                           AppLocalizations.of(context)!.eventDate,
                           style: textTheme.titleMedium,
                         ),
+                        Text(
+                          AppLocalizations.of(context)!.eventDate,
+                          style: textTheme.titleMedium,
+                        ),
                         Spacer(),
                         InkWell(
                           onTap: () async {
@@ -163,6 +179,7 @@ class _CreateEventState extends State<CreateEvent> {
                           },
                           child: Text(
                             selectedDate == null
+                                ? AppLocalizations.of(context)!.chooseDate
                                 ? AppLocalizations.of(context)!.chooseDate
                                 : dateFormat.format(selectedDate!),
                             style: textTheme.titleMedium!.copyWith(
@@ -189,6 +206,10 @@ class _CreateEventState extends State<CreateEvent> {
                           AppLocalizations.of(context)!.eventTime,
                           style: textTheme.titleMedium,
                         ),
+                        Text(
+                          AppLocalizations.of(context)!.eventTime,
+                          style: textTheme.titleMedium,
+                        ),
                         Spacer(),
                         InkWell(
                           onTap: () async {
@@ -204,6 +225,7 @@ class _CreateEventState extends State<CreateEvent> {
                           child: Text(
                             selectedTime == null
                                 ? AppLocalizations.of(context)!.chooseTime
+                                ? AppLocalizations.of(context)!.chooseTime
                                 : selectedTime!.format(context),
                             style: textTheme.titleMedium!.copyWith(
                               color: AppTheme.primary,
@@ -214,6 +236,7 @@ class _CreateEventState extends State<CreateEvent> {
                     ),
                     SizedBox(height: 24),
                     DefaultElevatedButton(
+                      label: AppLocalizations.of(context)!.createEvent,
                       label: AppLocalizations.of(context)!.createEvent,
                       onPressed: createEvent,
                     ),
@@ -245,6 +268,8 @@ class _CreateEventState extends State<CreateEvent> {
         description: descriptionController.text,
         dateTime: dateTime,
       );
+      Provider.of<EventsProvider>(context, listen: false).addEvent(event);
+      Navigator.of(context).pop();
       Provider.of<EventsProvider>(context, listen: false).addEvent(event);
       Navigator.of(context).pop();
     }

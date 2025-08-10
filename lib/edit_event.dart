@@ -1,4 +1,8 @@
 import 'package:evently/app_theme.dart';
+<<<<<<< HEAD
+=======
+import 'package:evently/firebase_service.dart';
+>>>>>>> cbd1a5360d5557c2cd388284800b1240ffcbb1bd
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/category_model.dart';
 import 'package:evently/models/event_model.dart';
