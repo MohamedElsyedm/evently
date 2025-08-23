@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 class UserModel {
   String id;
   String name;
@@ -25,4 +27,16 @@ class UserModel {
     'email': email,
     'favoriteEventIds': favoriteEventIds,
   };
+
+  factory UserModel.fromFirebaseUser(User? user) {
+    if (user == null) {
+      return UserModel(id: '', name: '', email: '', favoriteEventIds: []);
+    }
+    return UserModel(
+      id: user.uid,
+      email: user.email.toString(),
+      name: user.displayName.toString(),
+      favoriteEventIds: [],
+    );
+  }
 }

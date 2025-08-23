@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently/models/event_model.dart';
 import 'package:evently/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseService {
   static CollectionReference<EventModel> getEventCollection() =>
@@ -51,6 +52,40 @@ class FirebaseService {
     return doc.delete();
   }
 
+  //firebase auth
+
+  final _auth = FirebaseAuth.instance;
+
+  final _googleSignIn = GoogleSignIn();
+
+  Future<UserModel?> signInWithGoogleAccount() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
+      if (googleUser == null) {
+        return null;
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      //signin with google auth tokens
+      final cred = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+        accessToken: googleAuth.accessToken,
+      );
+
+      //signin with created google credential
+      final userCred = await _auth.signInWithCredential(cred);
+
+      UserModel userModel = UserModel.fromFirebaseUser(userCred.user);
+      return userModel;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   static Future<UserModel> register({
     required String name,
     required String email,
@@ -86,7 +121,10 @@ class FirebaseService {
     return docSnapshot.data()!;
   }
 
-  static Future<void> logout() => FirebaseAuth.instance.signOut();
+  static Future<void> logout() {
+    return FirebaseAuth.instance.signOut();
+    // _googleSignIn.signOut();
+  }
 
   static Future<void> addEventToFavorite(String eventId) async {
     CollectionReference<UserModel> userCollection = getUserCollection();

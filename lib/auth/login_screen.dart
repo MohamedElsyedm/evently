@@ -24,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final googleAuth = FirebaseService();
 
   @override
   Widget build(BuildContext context) {
@@ -119,10 +120,22 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 24),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  googleAuth.signInWithGoogleAccount().then((user) {
+                    Provider.of<UserProvider>(
+                      context,
+                      listen: false,
+                    ).updateCurrentUser(user);
+                    UiUtils.showSuccessMessage('Login Successfully');
+                    if (mounted) {
+                      Navigator.of(
+                        context,
+                      ).pushReplacementNamed(HomeScreen.routName);
+                    }
+                  });
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppTheme.white,
-
                   fixedSize: Size(screenSize.width, 57),
                 ),
                 child: Row(
