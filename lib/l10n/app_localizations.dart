@@ -295,6 +295,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search For Event'**
   String get searchForEvent;
+
+  /// No description provided for @chooseLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'choose Location'**
+  String get chooseLocation;
+
+  /// No description provided for @plsSelectUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select user'**
+  String get plsSelectUser;
+
+  /// No description provided for @loginSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Login Successfully'**
+  String get loginSuccessfully;
+
+  /// No description provided for @loginWithGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Login With Google'**
+  String get loginWithGoogle;
+
+  /// No description provided for @passError.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 8 characters'**
+  String get passError;
+
+  /// No description provided for @or.
+  ///
+  /// In en, this message translates to:
+  /// **'Or'**
+  String get or;
+
+  /// No description provided for @invalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid Email'**
+  String get invalidEmail;
+
+  /// No description provided for @editEventMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you want to edit this event?'**
+  String get editEventMessage;
+
+  /// No description provided for @deleteEventMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you want to delete this event?'**
+  String get deleteEventMessage;
+
+  /// No description provided for @deleteEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Event'**
+  String get deleteEvent;
 }
 
 class _AppLocalizationsDelegate

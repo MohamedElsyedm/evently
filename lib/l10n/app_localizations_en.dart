@@ -106,4 +106,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get searchForEvent => 'Search For Event';
+
+  @override
+  String get chooseLocation => 'choose Location';
+
+  @override
+  String get plsSelectUser => 'Please select user';
+
+  @override
+  String get loginSuccessfully => 'Login Successfully';
+
+  @override
+  String get loginWithGoogle => 'Login With Google';
+
+  @override
+  String get passError => 'Password must be at least 8 characters';
+
+  @override
+  String get or => 'Or';
+
+  @override
+  String get invalidEmail => 'Invalid Email';
+
+  @override
+  String get editEventMessage => 'Are you want to edit this event?';
+
+  @override
+  String get deleteEventMessage => 'Are you want to delete this event?';
+
+  @override
+  String get deleteEvent => 'Delete Event';
 }

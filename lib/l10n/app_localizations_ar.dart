@@ -106,4 +106,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get searchForEvent => 'ابحث عن حدثك المفضل';
+
+  @override
+  String get chooseLocation => 'اختر موقعاً';
+
+  @override
+  String get plsSelectUser => 'من فضلك اختر حساب';
+
+  @override
+  String get loginSuccessfully => 'تم تسجيل الدخول بنجاح';
+
+  @override
+  String get loginWithGoogle => ' التسجيل بواسطة جوجل';
+
+  @override
+  String get passError => 'يجب الا تكون كلمة المرور اقل من 8 حروف';
+
+  @override
+  String get or => 'أو';
+
+  @override
+  String get invalidEmail => 'عنوان بريد إلكترونى غير صحيح';
+
+  @override
+  String get editEventMessage => 'هل أنت متأكد من تعديل هذا الحدث ؟';
+
+  @override
+  String get deleteEventMessage => 'هل أنت متأكد من إزالة هذا الحدث ؟';
+
+  @override
+  String get deleteEvent => 'إزالة الحدث';
 }

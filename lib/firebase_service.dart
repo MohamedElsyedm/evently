@@ -52,15 +52,9 @@ class FirebaseService {
     return doc.delete();
   }
 
-  //firebase auth
-
-  final _auth = FirebaseAuth.instance;
-
-  final _googleSignIn = GoogleSignIn();
-
   Future<UserModel?> signInWithGoogleAccount() async {
     try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
       if (googleUser == null) {
         return null;
@@ -76,9 +70,11 @@ class FirebaseService {
       );
 
       //signin with created google credential
-      final userCred = await _auth.signInWithCredential(cred);
+      final UserCredential userCred = await FirebaseAuth.instance
+          .signInWithCredential(cred);
 
       UserModel userModel = UserModel.fromFirebaseUser(userCred.user);
+
       return userModel;
     } catch (error) {
       print(error.toString());

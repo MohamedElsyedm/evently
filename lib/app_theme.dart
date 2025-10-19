@@ -90,6 +90,11 @@ class AppTheme {
         fontWeight: FontWeight.w500,
         color: white,
       ),
+      headlineMedium: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: primary,
+      ),
       titleMedium: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w500,
@@ -172,6 +177,11 @@ class AppTheme {
       ),
     ),
     textTheme: TextTheme(
+      headlineMedium: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: primary,
+      ),
       headlineSmall: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,

@@ -31,5 +31,15 @@
     "exhibition":"العادات",
     "eating":"الاكل",
     "bookCub":"ناى الكتب",
-    "searchForEvent":"ابحث عن حدثك المفضل"
+    "searchForEvent":"ابحث عن حدثك المفضل",
+    "chooseLocation":"اختر موقعاً",
+    "plsSelectUser":"من فضلك اختر حساب",
+    "loginSuccessfully":"تم تسجيل الدخول بنجاح",
+    "loginWithGoogle":" التسجيل بواسطة جوجل",
+    "passError":"يجب الا تكون كلمة المرور اقل من 8 حروف",
+    "or":"أو",
+    "invalidEmail":"عنوان بريد إلكترونى غير صحيح",
+    "editEventMessage": "هل أنت متأكد من تعديل هذا الحدث ؟",
+    "deleteEventMessage": "هل أنت متأكد من إزالة هذا الحدث ؟",
+    "deleteEvent":"إزالة الحدث"
 }

@@ -25,11 +25,13 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final googleAuth = FirebaseService();
+  late AppLocalizations appLocalizations;
 
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
     Size screenSize = MediaQuery.sizeOf(context);
+    appLocalizations = AppLocalizations.of(context)!;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -47,24 +49,24 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 24),
               DefaultTextFormField(
-                hintText: AppLocalizations.of(context)!.email,
+                hintText: appLocalizations.email,
                 prefixIconImageName: 'email',
                 controller: emailController,
                 validator: (value) {
                   if (value == null || value.length < 5) {
-                    return 'Invalid Email';
+                    return appLocalizations.invalidEmail;
                   }
                   return null;
                 },
               ),
               SizedBox(height: 16),
               DefaultTextFormField(
-                hintText: AppLocalizations.of(context)!.password,
+                hintText: appLocalizations.password,
                 prefixIconImageName: 'password',
                 controller: passwordController,
                 validator: (value) {
                   if (value == null || value.length < 8) {
-                    return 'Password must be at least 8 characters';
+                    return appLocalizations.passError;
                   }
                   return null;
                 },
@@ -72,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 24),
               DefaultElevatedButton(
-                label: AppLocalizations.of(context)!.login,
+                label: appLocalizations.login,
                 onPressed: login,
               ),
               SizedBox(height: 20),
@@ -80,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.dontHaveAccount,
+                    appLocalizations.dontHaveAccount,
                     style: textTheme.titleMedium,
                   ),
                   TextButton(
@@ -89,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         context,
                       ).pushReplacementNamed(RegisterScreen.routName);
                     },
-                    child: Text(AppLocalizations.of(context)!.createAccount),
+                    child: Text(appLocalizations.createAccount),
                   ),
                 ],
               ),
@@ -105,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Text(
-                      'Or',
+                      appLocalizations.or,
                       style: textTheme.titleMedium!.copyWith(
                         color: AppTheme.primary,
                       ),
@@ -120,20 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 24),
               ElevatedButton(
-                onPressed: () {
-                  googleAuth.signInWithGoogleAccount().then((user) {
-                    Provider.of<UserProvider>(
-                      context,
-                      listen: false,
-                    ).updateCurrentUser(user);
-                    UiUtils.showSuccessMessage('Login Successfully');
-                    if (mounted) {
-                      Navigator.of(
-                        context,
-                      ).pushReplacementNamed(HomeScreen.routName);
-                    }
-                  });
-                },
+                onPressed: () => loginWithGoogle(),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppTheme.white,
                   fixedSize: Size(screenSize.width, 57),
@@ -148,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       fit: BoxFit.fill,
                     ),
                     Text(
-                      'Login With Google',
+                      appLocalizations.loginWithGoogle,
                       style: textTheme.titleLarge!.copyWith(
                         color: AppTheme.primary,
                       ),
@@ -174,7 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
               context,
               listen: false,
             ).updateCurrentUser(user);
-            UiUtils.showSuccessMessage('Login Successfully');
+            UiUtils.showSuccessMessage(appLocalizations.loginSuccessfully);
             if (mounted) {
               Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
             }
@@ -191,5 +180,23 @@ class _LoginScreenState extends State<LoginScreen> {
             UiUtils.showErrorMessage(errorMessage);
           });
     }
+  }
+
+  void loginWithGoogle() {
+    googleAuth.signInWithGoogleAccount().then((user) {
+      if (user == null) {
+        UiUtils.showErrorMessage(appLocalizations.plsSelectUser);
+        return;
+      } else {
+        Provider.of<UserProvider>(
+          context,
+          listen: false,
+        ).updateCurrentUser(user);
+        UiUtils.showSuccessMessage(appLocalizations.loginSuccessfully);
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+        }
+      }
+    });
   }
 }

@@ -31,5 +31,15 @@
     "exhibition":"Exhibition",
     "eating":"Eating",
     "bookCub":"BookClub",
-    "searchForEvent":"Search For Event"
+    "searchForEvent":"Search For Event",
+    "chooseLocation":"choose Location",
+    "plsSelectUser":"Please select user",
+    "loginSuccessfully":"Login Successfully",
+    "loginWithGoogle":"Login With Google",
+    "passError":"Password must be at least 8 characters",
+    "or":"Or",
+    "invalidEmail":"Invalid Email",
+    "editEventMessage": "Are you want to edit this event?",
+    "deleteEventMessage": "Are you want to delete this event?",
+     "deleteEvent":"Delete Event"
 }

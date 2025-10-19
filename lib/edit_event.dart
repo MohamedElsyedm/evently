@@ -1,13 +1,17 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/maps_functions/location_services.dart';
 import 'package:evently/models/category_model.dart';
 import 'package:evently/models/event_model.dart';
 import 'package:evently/providers/events_provider.dart';
+import 'package:evently/providers/location_provider.dart';
 import 'package:evently/tabs/home/tab_item.dart';
+import 'package:evently/ui_utils.dart';
 import 'package:evently/widgets/default_elevated_button.dart';
 import 'package:evently/widgets/default_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +24,6 @@ class EditEvent extends StatefulWidget {
 }
 
 class _EditEventState extends State<EditEvent> {
-  // EventModel? event;
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -32,6 +35,9 @@ class _EditEventState extends State<EditEvent> {
   TimeOfDay? selectedTime;
   DateFormat dateFormat = DateFormat('d/M/yyyy');
   EventModel? currentEvent;
+  LatLng? locationLatLang;
+  String? address;
+  AppLocalizations? appLocalizations;
 
   void declaration(BuildContext ctx) {
     currentEvent = ModalRoute.of(context)!.settings.arguments as EventModel;
@@ -41,15 +47,24 @@ class _EditEventState extends State<EditEvent> {
     selectedCategory = currentEvent!.category;
     selectedDate = currentEvent!.dateTime;
     selectedTime = TimeOfDay.fromDateTime(currentEvent!.dateTime);
+    address = currentEvent?.address ?? 'El Sharkia, Egypt';
+    locationLatLang = LatLng(
+      currentEvent?.lat ?? 31.56415324,
+      currentEvent?.long ?? 32.546153132,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    appLocalizations = AppLocalizations.of(context)!;
+    TextTheme textTheme = Theme.of(context).textTheme;
     if (currentEvent == null) {
       declaration(context);
     }
-    TextTheme textTheme = Theme.of(context).textTheme;
-    // print(event!.title);
+    LocationProvider locationProvider = Provider.of<LocationProvider>(context);
+    locationProvider.userLocation ??
+        locationProvider.getCurrentLocation(context);
+
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.editEvent)),
       body: SingleChildScrollView(
@@ -211,6 +226,62 @@ class _EditEventState extends State<EditEvent> {
                       ],
                     ),
                     SizedBox(height: 24),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: AppTheme.primary),
+                      ),
+                      child: InkWell(
+                        onTap: () async {
+                          LatLng? currentLocationLatLang =
+                              await LocationServices.pickLocation(context);
+                          if (currentLocationLatLang != null) {
+                            locationLatLang = currentLocationLatLang;
+                            address = await LocationServices.getLocationAddress(
+                              currentLocationLatLang,
+                            );
+                            setState(() {});
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              margin: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: AppTheme.primary,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Icon(
+                                Icons.my_location_rounded,
+                                size: 24,
+                                color: AppTheme.white,
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                address != null
+                                    ? address!
+                                    : appLocalizations!.chooseLocation,
+                                style: textTheme.titleMedium!.copyWith(
+                                  color: AppTheme.primary,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios_outlined,
+                              size: 24,
+                              color: AppTheme.primary,
+                            ),
+                            SizedBox(width: 8),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 24),
                     DefaultElevatedButton(
                       label: AppLocalizations.of(context)!.editEvent,
                       onPressed: editEvent,
@@ -227,26 +298,38 @@ class _EditEventState extends State<EditEvent> {
   }
 
   void editEvent() {
-    if (formKey.currentState!.validate() &&
-        selectedDate != null &&
-        selectedTime != null) {
-      DateTime dateTime = DateTime(
-        selectedDate!.year,
-        selectedDate!.month,
-        selectedDate!.day,
-        selectedTime!.hour,
-        selectedTime!.minute,
-      );
-      EventModel event = EventModel(
-        id: currentEvent!.id,
-        category: selectedCategory,
-        title: titleController.text,
-        description: descriptionController.text,
-        dateTime: dateTime,
-      );
-      Provider.of<EventsProvider>(context, listen: false).editEvent(event);
-      //how user know that date and time not selected ?
-      Navigator.of(context).pop();
-    }
+    UiUtils.showLoading(
+      context,
+      canPop: true,
+      title: Text(appLocalizations!.editEvent),
+      content: Center(child: Text(appLocalizations!.editEventMessage)),
+      buttonText: appLocalizations!.editEvent,
+      onTap: () {
+        if (formKey.currentState!.validate() &&
+            selectedDate != null &&
+            selectedTime != null) {
+          DateTime dateTime = DateTime(
+            selectedDate!.year,
+            selectedDate!.month,
+            selectedDate!.day,
+            selectedTime!.hour,
+            selectedTime!.minute,
+          );
+          EventModel event = EventModel(
+            id: currentEvent!.id,
+            category: selectedCategory,
+            title: titleController.text,
+            description: descriptionController.text,
+            dateTime: dateTime,
+            address: address,
+            lat: locationLatLang?.latitude ?? 31.54523526,
+            long: locationLatLang?.longitude ?? 32.456461557,
+          );
+          Provider.of<EventsProvider>(context, listen: false).editEvent(event);
+        }
+        UiUtils.hideLoading(context);
+        Navigator.of(context).pop();
+      },
+    );
   }
 }
